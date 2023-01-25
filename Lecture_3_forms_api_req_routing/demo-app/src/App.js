@@ -1,23 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
-
+import InputBox from './Components/InputBox';
+import OutputBox from './Components/OutputBox';
+import React, { useState } from 'react'
 function App() {
+  let [items, setItems] = useState([]);
+  const acceptNewTask = (task) => {
+    let newTaskArr = [...items, task];
+    // state var 
+    setItems(newTaskArr);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Todo App</h1>
+      <InputBox acceptNewTask={acceptNewTask}></InputBox>
+      <OutputBox
+        list={items}
+      ></OutputBox>
     </div>
   );
 }
