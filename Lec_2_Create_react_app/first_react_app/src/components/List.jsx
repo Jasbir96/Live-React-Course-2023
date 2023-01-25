@@ -2,6 +2,7 @@ import React from 'react'
 
 function List(props) {
     let items = ["pen", "pencil", "eraser"];
+    // array of html
     // console.log(arrOfHtml)
     // convert -> array of data -> array of html 
     return (
