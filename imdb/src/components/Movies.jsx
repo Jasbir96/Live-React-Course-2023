@@ -3,7 +3,7 @@ import Image from "./image.jpg";
 
 function Movies() {
     return (
-        <div className="-mt-14">
+        <div className="mt-8">
             <div className="mb-8
             font-bold text-2xl text-center
             "

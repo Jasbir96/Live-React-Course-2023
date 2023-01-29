@@ -17,7 +17,6 @@
     * vscode , nodejs and browser
 
 ## Commands
-
     * npx create-react-app imdb
     * cd imdb
     * npm start
@@ -25,10 +24,19 @@
 # Day-1
 * UI of Main Page
   * Main Page
-    [*] <!-- * NavBar   
-    [*] Banner -> how to make bg thing work `
-   [*] Movies -> done
-  [*] Pagination -->`
+    [*] NavBar   
+    [*] Banner  (bug)
+   [*] Movies  (bug)
+  [*] Pagination
 
-  // background
-* Routing in react
+# Day-2
+* <!-- Improve  -->
+  * Banner
+  * Movies 
+* Responsive
+* Routing 
+* Pagination functional 
+* TMDB API 
+  * data from there 
+  * add it UI
+
