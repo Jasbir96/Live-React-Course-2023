@@ -31,10 +31,10 @@
 
 # Day-2
 * <!-- Improve  -->
-  * Banner
-  * Movies 
-* Responsive
-* Routing 
+  [*] Banner 
+  [*] Movies 
+[*] Responsive
+[*] Routing in React  
 * Pagination functional 
 * TMDB API 
   * data from there 
