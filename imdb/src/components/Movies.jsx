@@ -1,6 +1,9 @@
 import React from 'react';
-import Image from "./image.jpg";
+// import Image from "./image.jpg";
+import axios from "axios";
 function Movies() {
+
+   
     return (
         <div className="mt-8">
             <div className="mb-8
@@ -115,7 +118,7 @@ function Movies() {
                 </div>
 
 
-               
+
 
 
 

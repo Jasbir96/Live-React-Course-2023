@@ -36,9 +36,13 @@
   [*] Movies 
 [*] Responsive
 [*] Routing in React 
-
-[] Pagination functional 
+[*] Pagination functional 
 * TMDB API 
   * data from there 
   * add it UI
+  * Images to work
 
+# Day-3 
+<!-- emojis, -->
+<!-- favourites -->
+<!-- Hosting -> netlify-->
