@@ -1,6 +1,7 @@
 // rfce
 import React from 'react';
 import Logo from "../download.png";
+import { Link } from "react-router-dom";
 function NavBar() {
     return (
         <div className="border
@@ -11,16 +12,16 @@ function NavBar() {
             <img src={Logo}
                 className="w-[50px]"
             />
-            <h3 className="font-bold 
+            <Link  to ="/" className="font-bold 
             text-xl
             text-blue-400
             "
-            >Movies</h3>
-            <h3 className="font-bold
+            >Movies</Link>
+            <Link  to ="/fav" className="font-bold
             text-xl
             text-blue-400
             
-            "> Favourites</h3>
+            "> Favourites</Link>
         </div>
     )
 }
