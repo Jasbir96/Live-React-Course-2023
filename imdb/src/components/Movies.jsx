@@ -1,21 +1,33 @@
 import React, { useEffect, useState } from 'react';
 // import Image from "./image.jpg";
 import axios from "axios";
+import Pagination from './Pagination';
 import { Oval } from "react-loader-spinner";
 function Movies() {
     let [movies, setMovies] = useState([]);
+    let [pageNum, setPage] = useState(1);
+    const onPrev = () => {
+        if (pageNum > 1) {
+            setPage(pageNum - 1);
+        }
+    }
+    const onNext = () => {
+        setPage(pageNum + 1);
+
+    }
 
     useEffect(function () {
+        console.log("useEffect again");
         (function () {
             axios
                 .get
-                ("https://api.themoviedb.org/3/trending/all/week?api_key=565dda78aae2b75fafddbc4320a33b38&page=1")
+                ("https://api.themoviedb.org/3/trending/all/week?api_key=565dda78aae2b75fafddbc4320a33b38&page="+pageNum)
                 .then((res) => {
                     // console.table(res.data.results);
                     setMovies(res.data.results);
                 })
         })()
-    }, [])
+    }, [pageNum])
 
     return (
         <div className="mt-8">
@@ -54,7 +66,7 @@ function Movies() {
                                 style={{
                                     backgroundImage:
                                         `url(
-                                    https://image.tmdb.org/t/p/original/t/p/w500/${movie.backdrop_path})`
+                                    https://image.tmdb.org/t/p/original/t/p/w500/${movie.poster_path})`
                                 }}
                             >
                                 <div
@@ -79,6 +91,11 @@ function Movies() {
 
 
             </div>
+            <Pagination
+                pageNum={pageNum}
+                onPrev={onPrev}
+                onNext={onNext}
+            ></Pagination>
         </div>
     )
 }

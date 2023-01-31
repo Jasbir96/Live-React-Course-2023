@@ -1,17 +1,7 @@
 import React, { useState } from 'react'
 
-function Pagination() {
-    let [pageNum, setPage] = useState(1);
-    const onPrev = () => {
-        if (pageNum > 1) {
-            setPage(pageNum - 1);
-        }
-    }
-    const onNext = () => {
-       
-            setPage(pageNum + 1);
-       
-    }
+function Pagination(props) {
+    let { pageNum, onNext, onPrev } = props;
     return (
         <div className="flex 
         justify-center
