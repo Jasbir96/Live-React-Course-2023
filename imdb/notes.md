@@ -43,6 +43,14 @@
   * Images to work
 
 # Day-3 
-<!-- emojis, -->
-<!-- favourites -->
-<!-- Hosting -> netlify-->
+* Movies Page
+  * Banner -> data
+  * Loader in react app
+  * Pagination
+* Emojis 
+* Local Storage -> Prevent loss of favourite movies
+* Basic Favourites Page UI 
+* Depolyment
+* Pagination,searching,sorting 
+* Update Deployment 
+
