@@ -42,15 +42,7 @@ function Banner() {
                         }}
                     >
                         <div
-                            className="
-                    text-xl 
-                    md:text-3xl
-                    text-white
-                bg-gray-900 bg-opacity-60
-                p-4
-                text-center
-                w-full
-                "
+                            className="text-xl md:text-3xltext-whitebg-gray-900 bg-opacity-60 p-4 text-center w-full"
                         >{bannerMovie.name}</div>
                     </div>
             }
