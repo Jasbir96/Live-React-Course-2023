@@ -19,6 +19,20 @@
     * go and enable the service
         * enabled email and password
     * Login is done
-* Database: Firestore    
+* Database: Firestore
+    * go and enable the service
+    * choose test mode with nearest to you
+    * modify the rules 
+* Hosting:
+    * npm install -g firebase-tools  
+    * npm run build
+    * first Time -> firebase login  
+    * firebase init 
+        * hosting -> optional github action 
+        * public dir : dist
+        * rewrites -> no , 
+        * overwrite -> no
+    * firebase deploy 
+
 
 
