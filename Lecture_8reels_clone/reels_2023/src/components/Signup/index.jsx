@@ -1,13 +1,13 @@
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 // import  "./insta";
 import { useState } from "react";
-function LoginForm() {
+function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const loginHelper = () => {
@@ -21,8 +21,10 @@ function LoginForm() {
         <CardContent>
           <img src="insta.png" alt=""
             height="80px"
-
           />
+          <Typography variant="body1"
+            style={{ color: "gray" }}
+          >Sign up to see photos and videos from your friends</Typography>
           <div>
             <TextField
               type="email"
@@ -47,15 +49,39 @@ function LoginForm() {
               onChange={(e) => { setPassword(e.target.value) }}
             />
           </div>
+          <div>
+            <TextField
+              type="text"
+              id="outlined-basic"
+              label="Full Name"
+              variant="outlined"
+              margin="normal"
+              fullWidth="true"
+              value={email}
+              onChange={(e) => { setEmail(e.target.value) }}
+            />
+          </div>
+          <Button variant="outlined"
+              component="label"
+            size="normal"
+            fullWidth
+            onClick={loginHelper}
+            style={{marginBottom: '10px',
+              color: "#cf2f74",
+              borderColor:"#cf2f74"
+          }}
+          startIcon={<CloudUploadIcon />}
+
+          > 
+            <input hidden accept="image/*" multiple type="file" />
+          UPLOAD PROFILE IMAGE</Button>
           <Button variant="contained"
             size="normal"
-
+            fullWidth
             onClick={loginHelper}
           >
             <Typography variant="h6">
-              Log in</Typography>
-
-
+              SIGNUP</Typography>
           </Button>
         </CardContent>
       </Card>
@@ -77,4 +103,4 @@ function LoginForm() {
   )
 }
 
-export default LoginForm;
+export default Signup;

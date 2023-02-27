@@ -1,28 +1,37 @@
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 function Crousel() {
   return (
     <div
-    style={{
-      height: "420px",
-        backgroundImage: "url('phone.png')",
-        backgroundSize: "contain",
-        backgroundRepeat: "no-repeat",
-        position: 'relative',
-
-    }}
+      className="crousel_container"
     >
-    
-      <img src="ss1.png"
-      height="300px"
-      alt="" 
-      style={{
-        position: 'absolute',
-          zIndex: 2,
-        left: "102px",
-        top: "17px",
-        height: "366px"
-      }}
-      />
+      <Carousel 
+      autoPlay={true}
+      showArrows={false}
+      showThumbs={false}
+      showStatus={false}
+        className="crousel_wrapper"
+        useKeyboardArrows={false}
+        showIndicators={false}
+        animationHandler="fade"  
+        swipeable={false} 
+        interval={1500}
+        transitionTime={500} 
+          >
+        <div>
+          <img src="ss1.png" className="crousel_image"/>
+        </div>
+        <div >
+          <img src="ss2.png" className="crousel_image" />
+        </div>
+        <div >
+          <img src="ss3.png" className="crousel_image" />
+        </div>
+        <div >
+          <img src="ss4.png" className="crousel_image" />
+        </div>
+      </Carousel>
     </div>
   )
 }
