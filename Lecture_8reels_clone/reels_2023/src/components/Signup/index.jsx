@@ -5,6 +5,7 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { Link } from "react-router-dom";
 // import  "./insta";
 import { useState } from "react";
 function Signup() {
@@ -62,19 +63,20 @@ function Signup() {
             />
           </div>
           <Button variant="outlined"
-              component="label"
+            component="label"
             size="normal"
             fullWidth
             onClick={loginHelper}
-            style={{marginBottom: '10px',
+            style={{
+              marginBottom: '10px',
               color: "#cf2f74",
-              borderColor:"#cf2f74"
-          }}
-          startIcon={<CloudUploadIcon />}
+              borderColor: "#cf2f74"
+            }}
+            startIcon={<CloudUploadIcon />}
 
-          > 
+          >
             <input hidden accept="image/*" multiple type="file" />
-          UPLOAD PROFILE IMAGE</Button>
+            UPLOAD PROFILE IMAGE</Button>
           <Button variant="contained"
             size="normal"
             fullWidth
@@ -90,11 +92,15 @@ function Signup() {
         marginTop: "1rem"
       }}>
         <CardContent>
-          <Typography variant="p">
+          <Typography variant="p"
+          >
             Don't have an account
             <Button variant='text'
             >
-              <Typography >Signup</Typography>
+              <Typography
+              >
+                <Link to="/login"> Login</Link>
+              </Typography>
             </Button>
           </Typography>
         </CardContent>

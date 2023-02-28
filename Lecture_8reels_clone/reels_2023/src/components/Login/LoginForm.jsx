@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material';
+import {Link} from "react-router-dom";
 // import  "./insta";
 import { useState } from "react";
 function LoginForm() {
@@ -14,10 +15,13 @@ function LoginForm() {
     console.log(email, " ", password)
   }
   return (
-    <>
+    <div>
       {/* <div>LoginForm</div> */}
-
-      <Card sx={{ minWidth: 275 }}>
+      <Card sx={{ minWidth: 360
+      
+      }}
+      style={{border:"2px solid lightgray"}}
+      >
         <CardContent>
           <img src="insta.png" alt=""
             height="80px"
@@ -62,18 +66,26 @@ function LoginForm() {
       <Card sx={{
         minWidth: 275,
         marginTop: "1rem"
-      }}>
+      }}
+        style={{ border: "2px solid lightgray" }}
+      >
+        
         <CardContent>
           <Typography variant="p">
             Don't have an account
-            <Button variant='text'
+            <Button variant='text' 
             >
-              <Typography >Signup</Typography>
+              <Typography >
+
+                <Link to="/signup">Signup</Link>
+              </Typography>
             </Button>
           </Typography>
         </CardContent>
       </Card>
-    </>
+</div>
+      
+  
   )
 }
 
