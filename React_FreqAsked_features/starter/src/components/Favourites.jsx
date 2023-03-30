@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Pagination from "./Pagination";
 let genreids = {
   28: 'Action',
@@ -101,15 +101,20 @@ let sampleMovies = [
 function Favourites() {
   let [genres, setGenres] = useState([]);
   let [movies, setMovies] = useState(sampleMovies);
- let [searchItem, setSearchItem] = useState("");
+  let [searchItem, setSearchItem] = useState("");
+  let [curGenre, setCurrentgenre] = useState("All Genres");
+  let [curRatingOrder, setCurRatingOrder] = useState(0);
+  let [curPopularityOrder, setPopularityOrder] = useState(0);
+  let [noOfElems, setNoofElemns] = useState(2);
+  let [curPage, setCurPage] = useState(2);
   /** delete movie*/
-const deleteMovie =(id)=>{
-  // can't change movies array directly
- const restofTheMovies= movies.filter((movie)=>{
-    return movie.id!=id;
-  }) 
-  setMovies(restofTheMovies);
-}
+  const deleteMovie = (id) => {
+    // can't change movies array directly
+    const restofTheMovies = movies.filter((movie) => {
+      return movie.id != id;
+    })
+    setMovies(restofTheMovies);
+  }
 
   useEffect(() => {
 
@@ -120,48 +125,120 @@ const deleteMovie =(id)=>{
     setGenres(["All Genres", ...temp]);
   }, [])
 
-  /**  search something
 
+  const onCurGenre = (genre) => {
+    setCurrentgenre(genre);
+    setCurPage(1);
+
+
+  }
+
+  /**  search something
   //  map a searched movies -> searched 
   */
 
-  let searchedMovies=searchItem=="" ? movies:movies.filter((movie)=>{
+  let searchedMovies = searchItem == "" ? movies : movies.filter((movie) => {
     let movieName = movie.title || movie.name;
-    let lowerCharSearch=searchItem.toLowerCase();
-    return  movieName.toLowerCase().includes(lowerCharSearch);});
+    let lowerCharSearch = searchItem.toLowerCase();
+    return movieName.toLowerCase().includes(lowerCharSearch);
+  });
 
 
+  /**filter */
+  let filteredMovies =
+    curGenre == "All Genres" ? searchedMovies :
+      searchedMovies.filter((searchedMovie) => {
+        return genreids[searchedMovie.genre_ids[0]] == curGenre;
+      })
 
-  
+
+  // sorting : rating 
+  if (curRatingOrder != 0) {
+    if (curRatingOrder == 1) {
+      filteredMovies = filteredMovies.sort((movieA, movieB) => {
+        return movieA.vote_average - movieB.vote_average;
+      })
+    }
+    else if (curRatingOrder == -1) {
+      filteredMovies = filteredMovies.sort((movieA, movieB) => {
+        return movieB.vote_average - movieA.vote_average;
+      })
+    }
+  }
+  // sorting : popularity
+  if (curPopularityOrder != 0) {
+    if (curPopularityOrder == 1) {
+      filteredMovies = filteredMovies.sort((movieA, movieB) => {
+        return movieA.popularity - movieB.popularity;
+      })
+    }
+    else if (curPopularityOrder == -1) {
+      filteredMovies = filteredMovies.sort((movieA, movieB) => {
+        return movieB.popularity - movieA.popularity;
+      })
+    }
+  }
+
+
+  /**pagination */
+
+  let si = (noOfElems) * (Number(curPage) - 1);
+  let ei = Number(noOfElems) + Number(si);
+  // console.log(si,ei);
+  let maxPageNum = Math.ceil(filteredMovies.length / noOfElems);
+  filteredMovies = filteredMovies.slice(si, ei);
+
+
+  const onPrev = (pageNum) => {
+    if (pageNum > 0) {
+      setCurPage(pageNum);
+
+    }
+  }
+
+  const onNext = (pageNum) => {
+    if (pageNum <= maxPageNum) {
+setCurPage(pageNum);
+    }
+  }
 
   return (
     <>
-    {/* generes  */}
+      {/* generes  */}
       <div className="mt-6 flex space-x-2 justify-center">
-        
         {genres.map((genre => {
           return (
             <button
-              className='py-1 px-2 bg-gray-400 rounded-lg font-bold text-lg text-white hover:bg-blue-400'
+              className={genre == curGenre ? `py-1 px-2  rounded-lg
+               font-bold text-lg text-white bg-blue-400`: `py-1 px-2 bg-gray-400 rounded-lg
+               font-bold text-lg text-white hover:bg-blue-400` }
+              onClick={() => { onCurGenre(genre) }}
             > {genre}</button>
           )
         }))}
 
       </div>
-{/* searching */}
+      {/* searching */}
       <div className="mt-4 flex justify-center space-x-2
       ">
         <input type="text" placeholder='search'
           className=" border-2 py-1 px-2 text-center"
-        value={searchItem}
-        onChange={(e)=>{ setSearchItem(e.target.value)}}
+          value={searchItem}
+          onChange={(e) => { setSearchItem(e.target.value) 
+            setCurPage(1);
+
+          }}
         />
         <input type="number" className="border-2 py-1 px-2 text-center"
-          
+          value={noOfElems}
+          onChange={(e) => { setNoofElemns(e.target.value)
+            setCurPage(1);
+
+          }}
         />
       </div>
 
-{/* dashboard table */}
+      {/* dashboard table */}
       <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
         <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
           <thead class="bg-gray-50">
@@ -169,17 +246,36 @@ const deleteMovie =(id)=>{
               <th scope="col" class="px-6 py-4 font-medium text-gray-900">Name</th>
               <th scope="col" class="px-6 py-4 font-medium text-gray-900">
                 <div className='flex'>
-                  <img src="https://img.icons8.com/external-those-icons-lineal-those-icons/24/000000/external-up-arrows-those-icons-lineal-those-icons-3.png" class="mr-2 cursor-pointer"></img>
+                  <img src="https://img.icons8.com/external-those-icons-lineal-those-icons/24/000000/external-up-arrows-those-icons-lineal-those-icons-3.png" class="mr-2 cursor-pointer"
+                    onClick={() => { setCurRatingOrder(1)
+                    setCurPage(1);
+                    }}
+                  ></img>
                   <div>Rating</div>
-                  <img src="https://img.icons8.com/external-those-icons-lineal-those-icons/24/000000/external-down-arrows-those-icons-lineal-those-icons-4.png" class="ml-2 mr-2"></img>
+                  <img src="https://img.icons8.com/external-those-icons-lineal-those-icons/24/000000/external-down-arrows-those-icons-lineal-those-icons-4.png"
+                    onClick={() => { setCurRatingOrder(-1) 
+                    setCurPage(1);
+                    }}
+                    class="ml-2 mr-2"></img>
                 </div>
 
               </th>
               <th scope="col" class="px-6 py-4 font-medium text-gray-900 ">
                 <div className='flex'>
-                  <img src="https://img.icons8.com/external-those-icons-lineal-those-icons/24/000000/external-up-arrows-those-icons-lineal-those-icons-3.png" class="mr-2 cursor-pointer"></img>
+                  <img src="https://img.icons8.com/external-those-icons-lineal-those-icons/24/000000/external-up-arrows-those-icons-lineal-those-icons-3.png"
+                    onClick={() => { setPopularityOrder(1)
+                      setCurPage(1);
+
+                    }}
+                    class="mr-2 cursor-pointer"></img>
                   <div>Popularity</div>
-                  <img src="https://img.icons8.com/external-those-icons-lineal-those-icons/24/000000/external-down-arrows-those-icons-lineal-those-icons-4.png" class="ml-2 mr-2"></img>
+                  <img src="https://img.icons8.com/external-those-icons-lineal-those-icons/24/000000/external-down-arrows-those-icons-lineal-those-icons-4.png"
+                    onClick={() => { setPopularityOrder(-1) 
+                      setCurPage(1);
+
+                    }}
+
+                    class="ml-2 mr-2"></img>
                 </div>
               </th>
               <th scope="col" class="px-6 py-4 font-medium text-gray-900 ">Genre</th>
@@ -187,7 +283,7 @@ const deleteMovie =(id)=>{
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100 border-t border-gray-100">
-            {searchedMovies.map((movie) => {
+            {filteredMovies.map((movie) => {
               // { console.log(movie) };
               return <tr class="hover:bg-gray-50" key={movie.id}>
                 <th class="flex items-center px-6 py-4 font-normal text-gray-900 space-x-2">
@@ -219,9 +315,9 @@ const deleteMovie =(id)=>{
                     className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold text-red-600
                     cursor-pointer
                     "
-                  onClick={()=>{
-                    deleteMovie(movie.id)
-                  }}
+                    onClick={() => {
+                      deleteMovie(movie.id)
+                    }}
                   >
                     Delete
                   </span>
@@ -232,7 +328,10 @@ const deleteMovie =(id)=>{
         </table>
       </div>
       {/* pagination */}
-      <Pagination></Pagination>
+      <Pagination pageNum={curPage}
+        onPrev={onPrev}
+        onNext={onNext}
+      ></Pagination>
     </>
   )
 }
